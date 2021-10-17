@@ -1,21 +1,103 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="utf-8">
-  <title>Green IT - Calculatrice</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+    <meta charset="utf-8">
+    <title>Green IT - Calculatrice</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scriptTest.js"></script>
 </head>
+
 <body>
 
     <h1>Calcul de votre impact environnemental</h1>
 
     <div id="presentation">
         <p>Cette outil vous permet de calculer votre impact environnemental en fonction de vos déplacement et de votre utilisation d'outils numérique</p>
-    </div>
-    <div id="calculatrice">
-        
-    </div>
- 
+
+
+        <div id="calculatrice">
+            <div id="equipment">
+                <p>Veuillez cocher les équipements en votre possession</p>
+
+                Ordinateur : <input type="checkbox" id="checkComputer" onclick="function_YoN_computer()">
+                <div id=equipment_computer style="display:none">
+                    <div id=equipment_computer_choice>
+                        <label for="list_computer">Indiquez votre ordinateur  :</label>
+                        <input list="computer" type="text" id="list_computer">
+                        <datalist id="computer">
+                          <option value="computer 1">
+                          <option value="computer 1">
+                          <option value="Autre">
+                </datalist>
+                    </div>
+                    <div id=equipment_computer_screen>
+                        <label for="list_screen">Indiquez le nombre d'écrans supplémentaires que vous utilisez :</label>
+                        <input list="screen" type="text" id="list_screen">
+                        <datalist id="screen">
+                          <option value="0">
+                          <option value="1">
+                          <option value="2">
+                          <option value="3">
+                        </datalist>
+                    </div>
+                </div>
+
+                Portable: <input type="checkbox" id="checkPhone" onclick="function_YoN_phone()">
+                <div id=equipment_phone style="display:none">
+                    <label for="list_phone">Indiquez votre portable :</label>
+                    <input list="phone" type="text" id="list_phone">
+                    <datalist id="phone">
+                      <option value="Phone 1">
+                      <option value="Phone 1">
+                      <option value="Autre">
+                    </datalist>
+                </div>
+            </div>
+
+            <div id=schedule>
+                <label for="startSchedule">Indiquez votre heure d'arrivée au travail (en moyenne):</label>
+                <input type="time" id="startSchedule" name="startSchedule" required>
+                <label for="startSchedule">Indiquez votre heure de départ du travail (en moyenne): </label>
+                <input type="time" id="stopSchedule" name="stopSchedule" required>
+                <div id=schedule_nbDays>
+                    <label for="list_days">Indiquez le nombre de jour où vous travaillez dans une semaine :</label>
+                    <input type="text" id="list_days">
+                    <div id=schedule_rest>
+                        <label for="list_rest">Indiquez le temps de pause que vous prenez par semaine en heures :</label>
+                        <input list="rest" type="text" id="list_rest">
+                        <datalist id="rest">
+                          <option value="Moins d'1h">
+                          <option value="Entre 1h et 2h">
+                          <option value="Entre 2h et 3h">
+                          <option value="Entre 3h et 4h">
+                          <option value="Entre 4h et 5h">
+                          <option value="Plus de 5h">
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+
+            <div id=Cloud>
+                <div id=cloud_mail>
+                    <label for="list_cloud">Indiquez le nombre de mails que vous envoyés par jour :</label>
+                    <input list="mail" type="text" id="list_cloud">
+                    <datalist id="mail">
+                      <option value="0">
+                      <option value="1 à 15">
+                      <option value="16 à 30">
+                      <option value="31 à 45">
+                      <option value="45+">
+                    </datalist>
+                </div>
+                <div id=cloud_storage>
+                    <label for="list_cloud">Indiquez le nombre de Go stocké dans votre cloud :</label>
+                    <input type="text" id="list_cloud">
+
+                </div>
+            </div>
+        </div>
+
 </body>
+
 </html>
