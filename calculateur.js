@@ -127,3 +127,13 @@ function consommation_deplacement_pro(){
     let UEC_deplacement_pro = (nb_km_par_annee*part_avion/100*360 + nb_km_par_annee*part_train/100*80 + nb_km_par_annee*part_voiture/100*600)/1000;
     return UEC_deplacement_pro;
 }
+
+/// <summary>
+/// Convertie la valeur de kWh en kg eq CO2
+/// </summary>
+/// <returns>Retourne le résultat de la conversion </returns>
+function convertisseur_kWh_GES(UEC_kwh){
+
+    const coefficient_conversion = 0.0001;
+    return (UEC_kwh*coefficient_conversion).toFixed(2);
+}
