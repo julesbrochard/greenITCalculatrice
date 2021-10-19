@@ -6,97 +6,129 @@
     <title>Green IT - Calculatrice</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="calculateur.js"></script>
 </head>
 
 <body>
 
     <h1>Calcul de votre impact environnemental</h1>
 
-    <div id="presentation">
-        <p>Cette outil vous permet de calculer votre impact environnemental en fonction de vos déplacement et de votre utilisation d'outils numérique</p>
+    <form action="/calculateur.js" method="get" class="form">
+        <div id="presentation">
+            <p>Cette outil vous permet de calculer votre impact environnemental en fonction de vos déplacement et de votre utilisation d'outils numérique</p>
 
 
-        <div id="calculatrice">
-            <div id="equipment">
-                <p>Veuillez cocher les équipements en votre possession</p>
-
-                Ordinateur : <input type="checkbox" id="checkComputer" onclick="function_YoN_computer()">
-                <div id=equipment_computer style="display:none">
-                    <div id=equipment_computer_choice>
-                        <label for="list_computer">Indiquez votre ordinateur  :</label>
-                        <input list="computer" type="text" id="list_computer">
-                        <datalist id="computer">
-                          <option value="computer 1">
-                          <option value="computer 1">
-                          <option value="Autre">
-                </datalist>
+            <div id="calculatrice">
+                <div id="equipment">
+                    <p>Veuillez cocher les équipements en votre possession</p>
+                    Ordinateur : <input type="checkbox" id="verifOrdinateur" onclick="function_YoN_ordinateur()">
+                    <div id=equipement_ordinateur style="display:none">
+                        <div id=equipement_ordinateur_choix>
+                            <label for="ordinateur">Indiquez votre ordinateur  :</label>
+                            <select id="ordinateur" required>
+                                <option value="ordinateur 1">Ordinateur 1</option>
+                                <option value="ordinateur 2">Ordinateur 2</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div id=equipement_ordinateur_ecran>
+                            <label for="ecran">Indiquez le nombre d'écrans supplémentaires que vous utilisez :</label>
+                            <select id="ecran" required>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
                     </div>
-                    <div id=equipment_computer_screen>
-                        <label for="list_screen">Indiquez le nombre d'écrans supplémentaires que vous utilisez :</label>
-                        <input list="screen" type="text" id="list_screen">
-                        <datalist id="screen">
-                          <option value="0">
-                          <option value="1">
-                          <option value="2">
-                          <option value="3">
-                        </datalist>
-                    </div>
-                </div>
-
-                Portable: <input type="checkbox" id="checkPhone" onclick="function_YoN_phone()">
-                <div id=equipment_phone style="display:none">
-                    <label for="list_phone">Indiquez votre portable :</label>
-                    <input list="phone" type="text" id="list_phone">
-                    <datalist id="phone">
-                      <option value="Phone 1">
-                      <option value="Phone 1">
-                      <option value="Autre">
-                    </datalist>
-                </div>
-            </div>
-
-            <div id=schedule>
-                <label for="startSchedule">Indiquez votre heure d'arrivée au travail (en moyenne):</label>
-                <input type="time" id="startSchedule" name="startSchedule" required>
-                <label for="startSchedule">Indiquez votre heure de départ du travail (en moyenne): </label>
-                <input type="time" id="stopSchedule" name="stopSchedule" required>
-                <div id=schedule_nbDays>
-                    <label for="list_days">Indiquez le nombre de jour où vous travaillez dans une semaine :</label>
-                    <input type="text" id="list_days">
-                    <div id=schedule_rest>
-                        <label for="list_rest">Indiquez le temps de pause que vous prenez par semaine en heures :</label>
-                        <input list="rest" type="text" id="list_rest">
-                        <datalist id="rest">
-                          <option value="Moins d'1h">
-                          <option value="Entre 1h et 2h">
-                          <option value="Entre 2h et 3h">
-                          <option value="Entre 3h et 4h">
-                          <option value="Entre 4h et 5h">
-                          <option value="Plus de 5h">
-                        </datalist>
+                    Portable: <input type="checkbox" id="verifTelephone" onclick="function_YoN_telephone()">
+                    <div id=equipement_telephone style="display:none">
+                        <label for="telephone">Indiquez votre portable :</label>
+                        <select id="telephone" required>
+                            <option value="telephone 1">Telephone 1</option>
+                            <option value="telephone 2">Telephone 2</option>
+                            <option value="autre">Autre</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-
-            <div id=Cloud>
-                <div id=cloud_mail>
-                    <label for="list_cloud">Indiquez le nombre de mails que vous envoyés par jour :</label>
-                    <input list="mail" type="text" id="list_cloud">
-                    <datalist id="mail">
-                      <option value="0">
-                      <option value="1 à 15">
-                      <option value="16 à 30">
-                      <option value="31 à 45">
-                      <option value="45+">
-                    </datalist>
+                <div id=edt>
+                    <div id=edt_debut>
+                        <label for="edt_debut_horaire">Indiquez votre heure d'arrivée au travail (en moyenne):</label>
+                        <input type="time" id="edt_debut_horaire" required>
+                    </div>
+                    <div id=edt_fin>
+                        <label for="edt_fin_horaire">Indiquez votre heure de départ du travail (en moyenne): </label>
+                        <input type="time" id="edt_fin_horaire" required>
+                    </div>
+                    <div id=edt_nbJours>
+                        <label for="edt_nbJours_select">Indiquez le nombre de jour où vous travaillez dans une semaine :</label>
+                        <select id="edt_nbJours_select" required>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+                    <div id=edt_pause>
+                        <label for="edt_pause_texte">Indiquez le temps de pause que vous prenez par semaine en heures :</label>
+                        <input type="text" id="edt_pause_texte">
+                    </div>
                 </div>
-                <div id=cloud_storage>
-                    <label for="list_cloud">Indiquez le nombre de Go stocké dans votre cloud :</label>
-                    <input type="text" id="list_cloud">
+                <div id=Cloud>
+                    <div id=cloud_mail>
+                        <label for="mail">Indiquez le nombre de mails que vous envoyés par jour :</label>
+                        <select id="mail" required>
+                            <option value="0">0</option>
+                            <option value="1">1 à 15</option>
+                            <option value="2">16 à 30</option>
+                            <option value="3">31 à 45</option>
+                            <option value="4">45+</option>
+                        </select>
+                    </div>
+                    <div id=cloud_stockage>
+                        <label for="stockage">Indiquez le nombre de Go stocké dans votre cloud :</label>
+                        <input type="text" id="stockage">
 
+                    </div>
+                </div>
+                <div id=trajet>
+                    <div id=trajet_transport>
+                        <label for="trajet_transport_choix">Comment réalisé vous votre trajet journalier ? :</label>
+                        <select id="trajet_transport_choix" required>
+                            <option value="voiture" >Voiture</option>
+                            <option value="velo">Vélo</option>
+                            <option value="pied">A pied</option>
+                            <option value="transport">Transport en commun</option>
+                        </select>
+                    </div>
+                    Faites vous du covoiturage ?: <input type="checkbox" id="verifCovoiturage" onclick="function_YoN_covoiturage()">
+                    <div id=trajet_covoiturage style="display:none">
+                        <label for="trajet_covoiturage_nb">Combien de personnes y a t'il dans votre covoiturage ? (en plus de vous) :</label>
+                        <select id="trajet_covoiturage_nb" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div id=trajet_pro>
+                        <p>Combien de Km professionnels avez vous fait dans l'année avec ses différents moyens de transport ? :</p>
+                        <label for="trajet_pro_voiture">En voiture :</label>
+                        <input type="text" id="trajet_pro_voiture">
+                        <label for="trajet_pro_train">En train :</label>
+                        <input type="text" id="trajet_pro_train">
+                        <label for="trajet_pro_avion">En avion :</label>
+                        <input type="text" id="trajet_pro_avion">
+                    </div>
                 </div>
             </div>
         </div>
+    </form>
+    <button type="submit" form="form" value="Submit">Validez vos réponses !</button>
 
 </body>
 
