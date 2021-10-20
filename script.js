@@ -5,46 +5,45 @@ function populateDropdown(){
 }
 
 function populateOrdiDropdown(){
-    let dropdownOrdi = document.getElementById("ordinateurDropdown");
 
-
-    var ordinateurs = [
-        {"Type":"Pc Portable Economique", "PA":"25 W","PL":"11 W","VO":"7 W"},
-        {"Type":"PC Portable Grand Format", "PA":"35 W","PL":"15 W","VO":"7 W"},
-        {"Type":"Pc Portable", "PA":"25 W","PL":"13W","VO":"7 W"},
-        {"Type":"MacBook pro", "PA":"26 W","PL":"13 W","VO":"6 W"},
-        {"Type":"LenovoYoga 7i", "PA":"24 W","PL":"12 W","VO":"7 W"},
-        {"Type":"Asus E203MA", "PA":"20 W","PL":"10 W","VO":"6 W"},
-        {"Type":"DELL XPS 15", "PA":"27 W","PL":"14W","VO":"7 W"}
+    var ordinateursJSon = [
+        {"Type":"Pc Portable Economique", "PA":25,"PL":11,"PO":7},
+        {"Type":"PC Portable Grand Format", "PA":35,"PL":15,"PO":7},
+        {"Type":"Pc Portable", "PA":25,"PL":13,"PO":7},
+        {"Type":"MacBook pro", "PA":26,"PL":13,"PO":6},
+        {"Type":"LenovoYoga 7i", "PA":24,"PL":12,"PO":7},
+        {"Type":"Asus E203MA", "PA":20,"PL":10,"PO":6},
+        {"Type":"DELL XPS 15", "PA":27,"PL":14,"PO":7}
     ];
 
+    let dropdownOrdi = document.getElementById("ordinateurDropdown");
     let defaultOption = document.createElement('option');
     defaultOption.text = 'Choisir un ordinateur';
     dropdownOrdi.add(defaultOption);
     dropdownOrdi.selectedIndex = 0;
 
-    for(var i=0;i< ordinateurs.length;i++){
-        console.log(ordinateurs[i]);
-        dropdownOrdi.innerHTML = dropdownOrdi.innerHTML+ '<option value="' + ordinateurs[i] +'">' + ordinateurs[i]['Type'] + '</option>';
+    for(var i=0;i< ordinateursJSon.length;i++){
+        console.log(ordinateursJSon[i]);
+        dropdownOrdi.innerHTML = dropdownOrdi.innerHTML+ '<option value="' + ordinateursJSon[i]['Type']+":"+ ordinateursJSon[i]['PA']+":"+ ordinateursJSon[i]['PL']+":"+ ordinateursJSon[i]['PO'] +'">' + ordinateursJSon[i]['Type'] + '</option>';
     }
 }
 
 function populateTelephoneDropdown(){
     let dropdownTelephone = document.getElementById("telephoneDropdown");
-    var telephones = [
-        {"Type":"Telephone Portable ", "PA":" 15 W","PL":" 6W","VO":" 2W"},
-        {"Type":"Xiaomi RedmiNote 10Pro", "PA":" 16W","PL":" 7W","VO":" 3W"},
-        {"Type":"Apple iPhone 12Pro", "PA":" 17W","PL":" 6W","VO":" 3W"},
-        {"Type":"Samsung Galaxy S20 FE4G", "PA":" 16W","PL":" 8W","VO":" 4W"},
-        {"Type":"Google Pixel 4a", "PA":" 14W","PL":" 7W","VO":" 3W"}
+    var telephonesJSon = [
+        {"Type":"Telephone Portable ", "PA":15,"PL":6,"PO":2},
+        {"Type":"Xiaomi RedmiNote 10Pro", "PA":16,"PL":7,"PO":3},
+        {"Type":"Apple iPhone 12Pro", "PA":17,"PL":6,"PO":3},
+        {"Type":"Samsung Galaxy S20 FE4G", "PA":16,"PL":8,"PO":4},
+        {"Type":"Google Pixel 4a", "PA":14,"PL":7,"PO":3}
     ];
     let defaultOption = document.createElement('option');
     defaultOption.text = 'Choisir un telephone';
     dropdownTelephone.add(defaultOption);
     dropdownTelephone.selectedIndex = 0;
 
-    for(var i=0;i< telephones.length;i++){
-        dropdownTelephone.innerHTML = dropdownTelephone.innerHTML+ '<option value="' + telephones[i] +'">' + telephones[i]['Type'] + '</option>';
+    for(var i=0;i< telephonesJSon.length;i++){
+        dropdownTelephone.innerHTML = dropdownTelephone.innerHTML+ '<option value="' + telephonesJSon[i]['Type']+":"+ telephonesJSon[i]['PA']+":"+ telephonesJSon[i]['PL']+":"+ telephonesJSon[i]['PO'] +'">' + telephonesJSon[i]['Type'] + '</option>';
     }
 }
 
@@ -120,30 +119,40 @@ function form_submit(){
     //traitement des données
     let nbHeureTravail = nb_dheure_de_travail(heureArrivee,heureDepart,nbJoursSemaine,tpsPause);
     let ordinateurDropdown;
-    let ordinateur;
+    let ordinateurID;
     let impactOrdinateur;
+    let impactTelephone;
     let consoCloud;
     let consoTransport;
+    let consoTotal=0;
 
     if(checkBoxOrdinateur.checked==true){
         ordinateurDropdown = document.getElementById("ordinateurDropdown");
-        ordinateur = ordinateurDropdown.value;
-        console.log(ordinateur);
+        ordinateurValue = ordinateurDropdown.value.toString();
+        console.log(ordinateurValue);
         //let ecran = document.getElementById("equipement_ordinateur_ecran").value;
-        impactOrdinateur= consommation_Pc(nbHeureTravail,ordinateur);
-        alert(impactOrdinateur);
+        impactOrdinateur= consommation_Pc(nbHeureTravail,ordinateurValue);
+        consoTotal+=parseFloat(impactOrdinateur);
+    }
+    if(checkBoxTelephone.checked==true){
+        telephoneDropdown = document.getElementById("telephoneDropdown");
+        telephone = telephoneDropdown.value;
+        console.log(telephone);
+        impactTelephone= consommation_Pc(nbHeureTravail,telephone);
+        consoTotal+=parseFloat(impactTelephone);
     }
 
     if(nbMail!=0 && stockageCloud!= 0){
         consoCloud = consommation_Cloud(nbHeureTravail,stockageCloud,nbMail);
-        console.log(consoCloud);
+        consoTotal+=parseFloat(consoCloud);
     }
 
     if(nbKmJournalier!=0){
         consoTransport = consommation_deplacement_quotidien(nbHeureTravail,typeTransport,nbKmJournalier,checkBoxCovoiturage,nbPassagersCovoit);
-        console.log(consoTransport);
+        consoTotal+=parseFloat(consoTransport);
     }
 
     let consoTransportPro = consommation_deplacement_pro(trajetProAvion,trajetProTrain,trajetProVoiture);
-    console.log(consoTransportPro);
+    consoTotal+=parseFloat(consoTransportPro);
+    alert('Consommation total: ' + consoTotal);
 }

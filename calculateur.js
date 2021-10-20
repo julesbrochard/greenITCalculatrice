@@ -9,7 +9,7 @@ function Device(nomModele,type,PA,PL,PO){
 }
 
 //Test des fonctions
-
+/*
 let heureDeTravail = nb_dheure_de_travail();
 let nb_dimpression= 4 ;                                      // (A récupérer dans le formulaire)
 let PC_choisi = new Device("Macbook","PC", 45, 15, 7);       // A remplacer par une fonction qui récupère le bon PC dans le fichier Json en fonction du formulaire
@@ -18,7 +18,7 @@ let UEC_PC = consommation_Pc(heureDeTravail,PC_choisi);
 let UEC_Cloud = consommation_Cloud(heureDeTravail).toFixed(2);
 let UEC_Transport_Quotidien = consommation_deplacement_quotidien(heureDeTravail).toFixed(2);
 let UEC_Transport_Pro = consommation_deplacement_pro().toFixed(2);
-let UEC_Impression = (0.3*nb_dimpression*heureDeTravail[2]*52/1000).toFixed(2);
+let UEC_Impression = (0.3*nb_dimpression*heureDeTravail[2]*52/1000).toFixed(2);*/
 /*
 alert("Le salarie travail "+heureDeTravail[0] +"h par semaine dont "+ heureDeTravail[1]+ "h de pause");
 alert("Avec son " + PC_choisi.nomModele +" le salarie a consomme : "+ UEC_PC + "kWh."); 
@@ -50,13 +50,15 @@ return HeureDeTravail= [(heure_depart-heure_arrive)*nb_jours_semaine , temps_de_
 /// <param name="NbHeureDeTravail">(tableau) Nb d'heures de travail et Nb d'heure de pause d</param>
 /// <param name="PC">(objet) Le PC demandé sur le formulaire et récupérer dans le fichier json d</param>
 /// <returns>Retourne la consommation du PC par an  en kWh </returns>
-function consommation_Pc(NbHeureDeTravail,PC){
+function consommation_Pc(NbHeureDeTravail,ordinateurValue){
 
+    let PC = ordinateurValue.toString().split(":");
+    console.log(PC);
     const SPM = 0.30;                                       // Valeur de base 30%  
     let HA = NbHeureDeTravail[0]-NbHeureDeTravail[1];       //Nombre d'heures ou le Pc est actif par semaine
     let HL = NbHeureDeTravail[1];                           //Nombre d'heures ou le Pc est en veille par semaine
     let HO = 24*7-NbHeureDeTravail[0];                      //Nombre d'heures ou le Pc est éteint par semaine
-    let UEC_Pc = (SPM* (PC.PA*HA + PC.PL*HL+ PC.PO*HO)/7)*365/1000 + ((1-SPM)*(PC.PA*(HA+HL)+PC.PO*HO)/7)*365/1000;
+    let UEC_Pc = (SPM* (PC[1]*HA + PC[2]*HL+ PC[3]*HO)/7)*365/1000 + ((1-SPM)*(PC[1]*(HA+HL)+PC[3]*HO)/7)*365/1000;
 
     return UEC_Pc.toFixed(2);
 }
