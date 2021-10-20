@@ -9,11 +9,11 @@
     <script src="calculateur.js"></script>
 </head>
 
-<body>
+<body onload="populateDropdown()">
 
     <h1>Calcul de votre impact environnemental</h1>
 
-    <form action="/calculateur.js" method="get" class="form">
+    <form id="calcForm" method="get" class="form" onsubmit="form_submit()">
         <div id="presentation">
             <p>Cette outil vous permet de calculer votre impact environnemental en fonction de vos déplacement et de votre utilisation d'outils numérique</p>
 
@@ -24,11 +24,8 @@
                     Ordinateur : <input type="checkbox" id="verifOrdinateur" onclick="function_YoN_ordinateur()">
                     <div id=equipement_ordinateur style="display:none">
                         <div id=equipement_ordinateur_choix>
-                            <label for="ordinateur">Indiquez votre ordinateur  :</label>
-                            <select id="ordinateur" required>
-                                <option value="ordinateur 1">Ordinateur 1</option>
-                                <option value="ordinateur 2">Ordinateur 2</option>
-                                <option value="Autre">Autre</option>
+                            <label for="ordinateurDropdown">Indiquez votre ordinateur  :</label>
+                            <select id="ordinateurDropdown" required>
                             </select>
                         </div>
                         <div id=equipement_ordinateur_ecran>
@@ -43,22 +40,19 @@
                     </div>
                     Portable: <input type="checkbox" id="verifTelephone" onclick="function_YoN_telephone()">
                     <div id=equipement_telephone style="display:none">
-                        <label for="telephone">Indiquez votre portable :</label>
-                        <select id="telephone" required>
-                            <option value="telephone 1">Telephone 1</option>
-                            <option value="telephone 2">Telephone 2</option>
-                            <option value="autre">Autre</option>
+                        <label for="telephoneDropdown">Indiquez votre portable :</label>
+                        <select id="telephoneDropdown" required>
                         </select>
                     </div>
                 </div>
                 <div id=edt>
                     <div id=edt_debut>
                         <label for="edt_debut_horaire">Indiquez votre heure d'arrivée au travail (en moyenne):</label>
-                        <input type="time" id="edt_debut_horaire" required>
+                        <input type="time" id="edt_debut_horaire" value="08:00" required>
                     </div>
                     <div id=edt_fin>
                         <label for="edt_fin_horaire">Indiquez votre heure de départ du travail (en moyenne): </label>
-                        <input type="time" id="edt_fin_horaire" required>
+                        <input type="time" id="edt_fin_horaire" value="16:30" required>
                     </div>
                     <div id=edt_nbJours>
                         <label for="edt_nbJours_select">Indiquez le nombre de jour où vous travaillez dans une semaine :</label>
@@ -75,7 +69,7 @@
                     </div>
                     <div id=edt_pause>
                         <label for="edt_pause_texte">Indiquez le temps de pause que vous prenez par semaine en heures :</label>
-                        <input type="text" id="edt_pause_texte">
+                        <input type="number" id="edt_pause_texte" min="0" value="0">
                     </div>
                 </div>
                 <div id=Cloud>
@@ -91,7 +85,7 @@
                     </div>
                     <div id=cloud_stockage>
                         <label for="stockage">Indiquez le nombre de Go stocké dans votre cloud :</label>
-                        <input type="text" id="stockage">
+                        <input type="number" id="stockage" min="0" value="0">
 
                     </div>
                 </div>
@@ -100,10 +94,14 @@
                         <label for="trajet_transport_choix">Comment réalisé vous votre trajet journalier ? :</label>
                         <select id="trajet_transport_choix" required>
                             <option value="voiture" >Voiture</option>
+                            <option value="vehicule_electrique">Véhicule électrique</option>
                             <option value="velo">Vélo</option>
                             <option value="pied">A pied</option>
-                            <option value="transport">Transport en commun</option>
+                            <option value="transport_en_commun">Transport en commun</option>
                         </select>
+                        <br>
+                        <label for="nb_km_journalier">Combien de kilomètre faites-vous par jour ?</label>
+                        <input type="number" id="nb_km_journalier" min="0" value="0">
                     </div>
                     Faites vous du covoiturage ?: <input type="checkbox" id="verifCovoiturage" onclick="function_YoN_covoiturage()">
                     <div id=trajet_covoiturage style="display:none">
@@ -118,17 +116,18 @@
                     <div id=trajet_pro>
                         <p>Combien de Km professionnels avez vous fait dans l'année avec ses différents moyens de transport ? :</p>
                         <label for="trajet_pro_voiture">En voiture :</label>
-                        <input type="text" id="trajet_pro_voiture">
+                        <input type="number" id="trajet_pro_voiture" min="0" value="0">
                         <label for="trajet_pro_train">En train :</label>
-                        <input type="text" id="trajet_pro_train">
+                        <input type="number" id="trajet_pro_train" min="0" value="0">
                         <label for="trajet_pro_avion">En avion :</label>
-                        <input type="text" id="trajet_pro_avion">
+                        <input type="number" id="trajet_pro_avion" min="0" value="0">
                     </div>
                 </div>
             </div>
         </div>
+        <input type="submit"  value="Submit" >Validez vos réponses !</input>
     </form>
-    <button type="submit" form="form" value="Submit">Validez vos réponses !</button>
+    
 
 </body>
 

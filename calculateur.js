@@ -19,13 +19,13 @@ let UEC_Cloud = consommation_Cloud(heureDeTravail).toFixed(2);
 let UEC_Transport_Quotidien = consommation_deplacement_quotidien(heureDeTravail).toFixed(2);
 let UEC_Transport_Pro = consommation_deplacement_pro().toFixed(2);
 let UEC_Impression = (0.3*nb_dimpression*heureDeTravail[2]*52/1000).toFixed(2);
-
+/*
 alert("Le salarie travail "+heureDeTravail[0] +"h par semaine dont "+ heureDeTravail[1]+ "h de pause");
 alert("Avec son " + PC_choisi.nomModele +" le salarie a consomme : "+ UEC_PC + "kWh."); 
 alert("Le salarie a consomme "+ UEC_Cloud + " kWh en utilisant le Cloud");
 alert("Conso de déplacement quotidien en kWh : " + UEC_Transport_Quotidien);
 alert("Conso de déplacement pro en kWh : " + UEC_Transport_Pro);
-alert("La conso pour " + nb_dimpression + " impressions par jour, le salarie consommera "+ UEC_Impression + " kWh par an");
+alert("La conso pour " + nb_dimpression + " impressions par jour, le salarie consommera "+ UEC_Impression + " kWh par an");*/
 
 
 //Fonction du script
@@ -34,14 +34,14 @@ alert("La conso pour " + nb_dimpression + " impressions par jour, le salarie con
 /// Calcul le nombre d'heures de travail et le nombre d'heures de pause du salarié dans une semaine
 /// </summary>
 /// <returns>Retourne un tableau [nombre d'heure au travail pendant la semaine, le nombre d'heure de pause, nb de jour travaillé dans la semaine] </returns>
-function nb_dheure_de_travail(){
+function nb_dheure_de_travail(heure_arrive,heure_depart,nb_jours_semaine,temps_de_pause){
 
-let heure_arrive = 9;       //Heure d'arrivée du salarié au travail (A récupérer dans le formulaire)
+/*let heure_arrive = 9;       //Heure d'arrivée du salarié au travail (A récupérer dans le formulaire)
 let heure_depart = 17;      //Heure de départ du salarié au travail (A récupérer dans le formulaire)
 let nb_jours_semaine = 5;   //Nombre de jours par semaine passé au travail (A récupérer dans le formulaire)
 let temps_de_pause = 1;     //Nombre d'heure de pause par jour (A récupérer dans le formulaire)
-
-return HeureDeTravail= [(heure_depart-heure_arrive)*nb_jours_semaine , temps_de_pause*nb_jours_semaine , nb_jours_semaine]; 
+*/
+return HeureDeTravail= [(heure_depart-heure_arrive)*nb_jours_semaine , temps_de_pause*nb_jours_semaine , nb_jours_semaine*1]; 
 }
 
 /// <summary>
@@ -99,13 +99,13 @@ function consommation_deplacement_quotidien(NbHeureDeTravail){
                 valeur_energetique_transport/=(nb_passagers+1);
             }
             break;
-        case 'vehicule electrique' : 
+        case 'vehicule_electrique' : 
             valeur_energetique_transport =75;           
             break;
-        case 'a pied' :
+        case 'pied' :
             valeur_energetique_transport =0;
             break;
-        case 'transport en commun' : 
+        case 'transport_en_commun' : 
             valeur_energetique_transport =150;
             break;
     }

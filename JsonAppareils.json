@@ -1,0 +1,49 @@
+
+
+    //il faut PA= puissance active PL=puissance en veille VO=puissance arret=7W//
+//moyenne de consomation 
+{"Type":'Pc Portable Economique', "PA":'25 W',"PL":'11 W',"VO":'7 W'}
+{"Type":'PC Portable Grand Format', "PA":'35 W',"PL":'15 W',"VO":'7 W'}
+{"Type":'Pc Portable', "PA":'25 W',"PL":'13W',"VO":'7 W'}
+//exemple de 4 modeles 
+{"Type":'MacBook pro', "PA":'26 W',"PL":'13 W',"VO":'6 W'}
+{"Type":'LenovoYoga 7i', "PA":'24 W',"PL":'12 W',"VO":'7 W'}
+{"Type":'Asus E203MA', "PA":'20 W',"PL":'10 W',"VO":'6 W'}
+{"Type":'DELL XPS 15', "PA":'27 W',"PL":'14W',"VO":'7 W'}
+
+
+
+//moyenne de consomation
+{"Type":'Telephone Portable ', "PA":' 15 W',"PL":' 6W',"VO":' 2W'}
+//exemple 4 telephones 
+{"Type":'Xiaomi RedmiNote 10Pro', "PA":' 16W',"PL":' 7W',"VO":' 3W'}
+{"Type":'Apple iPhone 12Pro', "PA":' 17W',"PL":' 6W',"VO":' 3W'}
+{"Type":'Samsung Galaxy S20 FE4G', "PA":' 16W',"PL":' 8W',"VO":' 4W'}
+{"Type":'Google Pixel 4a', "PA":' 14W',"PL":' 7W',"VO":' 3W'}
+
+
+
+{"Type":'Serveur', "PA":' 200 W',"PL":' 50W',"VO":' 15W'}
+
+{"Type":'PC Economique', "PA":'100 W',"PL":'20 W',"VO":'10 W'}
+
+{"Type":'PC multimédia', "PA":'120 W',"PL":'20 W',"VO":'10 W'}
+
+{"Type":'Station de travail', "PA":'200 W',"PL":'40 W',"VO":'15 W'}
+
+{"Type":'Ecran Suplémentaire', "PA":'115 W',"PL":'5 W',"VO":'3 W'}
+
+{"Type":'Imprimante Haute Hitesse Sans Label ', "PA":'177 W',"PL":'110 W',"VO":'17 W'}
+
+{"Type":'Imprimante Haute Hitesse Avec Label ', "PA":'177 W',"PL":'97 W',"VO":'11 W'}
+
+
+
+
+//imprimante: https://energieplus-lesite.be/evaluer/bureautique2/Evaluer-la-consommation-des-equipements/evaluer-la-consommation-des-photocopieurs/
+//ordinateurs: https://energieplus-lesite.be/evaluer/bureautique2/Evaluer-la-consommation-des-equipements/evaluer-la-consommation-des-ordinateurs/
+
+
+
+
+

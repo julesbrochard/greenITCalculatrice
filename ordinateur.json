@@ -1,0 +1,23 @@
+[
+    {
+    "Type":"Pc Portable Economique", "PA":"25 W","PL":"11 W","VO":"7 W"
+    },
+    {
+        "Type":"PC Portable Grand Format", "PA":"35 W","PL":"15 W","VO":"7 W"
+    },
+    {
+        "Type":"Pc Portable", "PA":"25 W","PL":"13W","VO":"7 W"
+    },
+    {
+        "Type":"MacBook pro", "PA":"26 W","PL":"13 W","VO":"6 W"
+    },
+    {
+        "Type":"LenovoYoga 7i", "PA":"24 W","PL":"12 W","VO":"7 W"
+    },
+    {
+        "Type":"Asus E203MA", "PA":"20 W","PL":"10 W","VO":"6 W"
+    },
+    {
+        "Type":"DELL XPS 15", "PA":"27 W","PL":"14W","VO":"7 W"
+    }
+]
