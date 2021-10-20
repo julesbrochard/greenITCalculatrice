@@ -66,12 +66,12 @@ function consommation_Pc(NbHeureDeTravail,PC){
 /// </summary>
 /// <param name="NbHeureDeTravail">(tableau) Nb d'heures de travail et Nb d'heure de pause d</param>
 /// <returns>Retourne la consommation du salarié sur le cloud par an en kWh </returns>
-function consommation_Cloud(NbHeureDeTravail){
+function consommation_Cloud(NbHeureDeTravail,nb_Go_Stockes,nb_Mail_Envoyes){
     
     const Wh_pour_un_Go = 96;      // Nombre de Wh pour stoké 1go sur le cloud pendant un an
     const Wh_pour_un_Mail = 2.5;    //Nombre de Wh pour stocké un mail un an
-    let nb_Go_Stockes = 92 ;           //Nombre de giga stocké par le salarié sur le cloud (A récupérer dans le formulaire)
-    let nb_Mail_Envoyes = 7;         //Nombre de mails envoyé par jour par le salarié (A récupérer dans le formulaire)
+    //let nb_Go_Stockes = 92 ;           //Nombre de giga stocké par le salarié sur le cloud (A récupérer dans le formulaire)
+    //let nb_Mail_Envoyes = 7;         //Nombre de mails envoyé par jour par le salarié (A récupérer dans le formulaire)
 
     return (Wh_pour_un_Go*nb_Go_Stockes+Wh_pour_un_Mail*nb_Mail_Envoyes*52*NbHeureDeTravail[2])/1000;
 
@@ -82,25 +82,27 @@ function consommation_Cloud(NbHeureDeTravail){
 /// </summary>
 /// <param name="NbHeureDeTravail">(tableau) Nb d'heures de travail et Nb d'heure de pause d</param>
 /// <returns>Retourne la consommation énergétique du aux déplacements quotidiens du salarié sur une année (en kWh) </returns>
-function consommation_deplacement_quotidien(NbHeureDeTravail){
+function consommation_deplacement_quotidien(NbHeureDeTravail,type_de_transport,nb_km_quotidien,bool_covoiturage,nb_passagers){
 
-    let type_de_transport='voiture';      //(A recupérer dans le formulaire)
-    let nb_km_quotidien = 21;                 //(A recupérer dans le formulaire)
+    //let type_de_transport='voiture';      //(A recupérer dans le formulaire)
+    //let nb_km_quotidien = 21;                 //(A recupérer dans le formulaire)
     let UEC_transport_quotidien;
     let valeur_energetique_transport;
 
     switch (type_de_transport){
         case 'voiture' :
             valeur_energetique_transport = 600;
-            let bool_covoiturage=false;   //(A recupérer dans le formulaire)
             if (bool_covoiturage == true)
             {
-                let nb_passagers;   //(A recupérer dans le formulaire)
                 valeur_energetique_transport/=(nb_passagers+1);
             }
             break;
         case 'vehicule_electrique' : 
-            valeur_energetique_transport =75;           
+            valeur_energetique_transport =75;     
+            if (bool_covoiturage == true)
+            {
+                valeur_energetique_transport/=(nb_passagers+1);
+            }      
             break;
         case 'pied' :
             valeur_energetique_transport =0;
@@ -117,14 +119,16 @@ function consommation_deplacement_quotidien(NbHeureDeTravail){
 /// Calcul la valeur énergétique d'un salarié sur une année complète pour ce qui est de ses déplacements professionnels
 /// </summary>
 /// <returns>Retourne la consommation énergétique du aux déplacements pro du salarié sur une année (en kWh) </returns>
-function consommation_deplacement_pro(){
+function consommation_deplacement_pro(part_avion,part_train,part_voiture){
 
-    let nb_km_par_annee=17542;    //(A recupérer dans le formulaire)
+    /*let nb_km_par_annee=17542;    //(A recupérer dans le formulaire)
     let part_avion=15;         //(A recupérer dans le formulaire)
     let part_train=27;         //(A recupérer dans le formulaire)
     let part_voiture=100-15-27;       //(A recupérer dans le formulaire)
+    nb_km_par_annee*part_avion remplacé par part_avion (nb de km en avion dans l'année)
+    */
 
-    let UEC_deplacement_pro = (nb_km_par_annee*part_avion/100*360 + nb_km_par_annee*part_train/100*80 + nb_km_par_annee*part_voiture/100*600)/1000;
+    let UEC_deplacement_pro = (part_avion/100*360 + part_train/100*80 + part_voiture/100*600)/1000;
     return UEC_deplacement_pro;
 }
 

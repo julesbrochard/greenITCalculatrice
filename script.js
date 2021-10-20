@@ -24,7 +24,8 @@ function populateOrdiDropdown(){
     dropdownOrdi.selectedIndex = 0;
 
     for(var i=0;i< ordinateurs.length;i++){
-        dropdownOrdi.innerHTML = dropdownOrdi.innerHTML+ '<option value="' + ordinateurs[i]['Type'] +'">' + ordinateurs[i]['Type'] + '</option>';
+        console.log(ordinateurs[i]);
+        dropdownOrdi.innerHTML = dropdownOrdi.innerHTML+ '<option value="' + ordinateurs[i] +'">' + ordinateurs[i]['Type'] + '</option>';
     }
 }
 
@@ -43,7 +44,7 @@ function populateTelephoneDropdown(){
     dropdownTelephone.selectedIndex = 0;
 
     for(var i=0;i< telephones.length;i++){
-        dropdownTelephone.innerHTML = dropdownTelephone.innerHTML+ '<option value="' + telephones[i]['Type'] +'">' + telephones[i]['Type'] + '</option>';
+        dropdownTelephone.innerHTML = dropdownTelephone.innerHTML+ '<option value="' + telephones[i] +'">' + telephones[i]['Type'] + '</option>';
     }
 }
 
@@ -99,11 +100,10 @@ function timeStringToFloat(time) {
   }
 
 function form_submit(){
-    alert("form submit");
     let form = document.getElementById("calcForm");
     //Récuperer les inputs du formulaire
-    let checkBoxOrdinateur = document.getElementById("verifOrdinateur").value;
-    let checkBoxTelephone = document.getElementById("verifTelephone").value;
+    let checkBoxOrdinateur = document.getElementById("verifOrdinateur");
+    let checkBoxTelephone = document.getElementById("verifTelephone");
     let heureArrivee = timeStringToFloat(document.getElementById("edt_debut_horaire").value);
     let heureDepart = timeStringToFloat(document.getElementById("edt_fin_horaire").value);
     let nbJoursSemaine = document.getElementById("edt_nbJours_select").value;
@@ -111,20 +111,39 @@ function form_submit(){
     let nbMail = document.getElementById("mail").value;
     let stockageCloud = document.getElementById("stockage").value;
     let typeTransport = document.getElementById("trajet_transport_choix").value;
-    let nbKmJournalier = document.getElementById("nb_km_journalier").value;
-    let checkBoxCovoiturage = document.getElementById("verifCovoiturage").value;
+    let nbKmJournalier = parseInt(document.getElementById("nb_km_journalier").value);
+    let checkBoxCovoiturage = document.getElementById("verifCovoiturage");
     let trajetProVoiture = document.getElementById("trajet_pro_voiture").value;
     let trajetProTrain = document.getElementById("trajet_pro_train").value;
     let trajetProAvion = document.getElementById("trajet_pro_avion").value;
-
+    let nbPassagersCovoit = parseInt(document.getElementById("trajet_covoiturage_nb").value);
     //traitement des données
     let nbHeureTravail = nb_dheure_de_travail(heureArrivee,heureDepart,nbJoursSemaine,tpsPause);
-
+    let ordinateurDropdown;
+    let ordinateur;
+    let impactOrdinateur;
+    let consoCloud;
+    let consoTransport;
 
     if(checkBoxOrdinateur.checked==true){
-        let ordinateur = document.getElementById("ordinateurDropdown").value;
-        let ecran = document.getElementById("equipement_ordinateur_ecran").value;
-        let impactOrdinateur= consommation_Pc(nbHeureTravail,ordinateur);
+        ordinateurDropdown = document.getElementById("ordinateurDropdown");
+        ordinateur = ordinateurDropdown.value;
+        console.log(ordinateur);
+        //let ecran = document.getElementById("equipement_ordinateur_ecran").value;
+        impactOrdinateur= consommation_Pc(nbHeureTravail,ordinateur);
         alert(impactOrdinateur);
     }
+
+    if(nbMail!=0 && stockageCloud!= 0){
+        consoCloud = consommation_Cloud(nbHeureTravail,stockageCloud,nbMail);
+        console.log(consoCloud);
+    }
+
+    if(nbKmJournalier!=0){
+        consoTransport = consommation_deplacement_quotidien(nbHeureTravail,typeTransport,nbKmJournalier,checkBoxCovoiturage,nbPassagersCovoit);
+        console.log(consoTransport);
+    }
+
+    let consoTransportPro = consommation_deplacement_pro(trajetProAvion,trajetProTrain,trajetProVoiture);
+    console.log(consoTransportPro);
 }
