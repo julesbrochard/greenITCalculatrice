@@ -98,7 +98,7 @@ function timeStringToFloat(time) {
     return hours + minutes / 60;
   }
 
-function form_submit(){
+function form_submit(e){
     let form = document.getElementById("calcForm");
     //Récuperer les inputs du formulaire
     let checkBoxOrdinateur = document.getElementById("verifOrdinateur");
@@ -154,5 +154,8 @@ function form_submit(){
 
     let consoTransportPro = consommation_deplacement_pro(trajetProAvion,trajetProTrain,trajetProVoiture);
     consoTotal+=parseFloat(consoTransportPro);
-    alert('Consommation total: ' + consoTotal);
+    console.log('Consommation total: ' + consoTotal + " KwH");
+    let impactCo2 = convertisseur_kWh_GES(consoTotal);
+    console.log(impactCo2);
+    document.getElementById("reponseFormulaire").innerHTML += '<p>Votre consommation en Kg eq CO2 est: '+ impactCo2.toString() +'</p>'
 }
