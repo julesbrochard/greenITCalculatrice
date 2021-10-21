@@ -103,9 +103,5 @@ select {
   width:100px;
 }
 
-@media only screen and (min-width: 600px) {
-  p,div,input[type=text],select,input[type=submit],input[type=number],input[type=time]{font-size: 30px;
-  width: 200px}
-}
 
 
