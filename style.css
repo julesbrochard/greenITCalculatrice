@@ -82,3 +82,6 @@ button {
   cursor: pointer;
 }
 
+@media only screen and (min-width: 600px) {
+  .div {width: 8.33%;}
+}
