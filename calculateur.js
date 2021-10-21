@@ -54,11 +54,13 @@ function consommation_Pc(NbHeureDeTravail,ordinateurValue){
 
     let PC = ordinateurValue.toString().split(":");
     console.log(PC);
-    const SPM = 0.30;                                       // Valeur de base 30%  
+    const SPM = 0.30;                                       // Valeur de base 30%
+    const ConsoEcran = 22; 
+    let NombreEcran =2;             //(a recuperer dans le formulaire) 
     let HA = NbHeureDeTravail[0]-NbHeureDeTravail[1];       //Nombre d'heures ou le Pc est actif par semaine
     let HL = NbHeureDeTravail[1];                           //Nombre d'heures ou le Pc est en veille par semaine
     let HO = 24*7-NbHeureDeTravail[0];                      //Nombre d'heures ou le Pc est éteint par semaine
-    let UEC_Pc = (SPM* (PC[1]*HA + PC[2]*HL+ PC[3]*HO)/7)*365/1000 + ((1-SPM)*(PC[1]*(HA+HL)+PC[3]*HO)/7)*365/1000;
+    let UEC_Pc = (SPM* (PC[1]*HA + PC[2]*HL+ PC[3]*HO)/7)*365/1000 + ((1-SPM)*(PC[1]*(HA+HL)+PC[3]*HO)/7)*365/1000+ConsoEcran*NombreEcran*HA*52/1000;
 
     return UEC_Pc.toFixed(2);
 }
