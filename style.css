@@ -26,6 +26,7 @@ input[type=text], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-size: 24px;
 }
 
 input[type=submit] {
@@ -37,6 +38,7 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 24px;
 }
 
 input[type=submit]:hover {
@@ -48,6 +50,7 @@ div {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+  font-size: 24px;
 }
 
 button {
@@ -58,8 +61,7 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 24px;
   margin: 4px 2px;
   cursor: pointer;
-  float: left;
 }
