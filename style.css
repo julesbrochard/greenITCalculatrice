@@ -18,6 +18,17 @@ h1 {
    color: white;
 }
 
+p{  
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 30px;
+}
+
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -26,6 +37,7 @@ input[type=text], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  font-size: 30px;
 }
 
 input[type=submit] {
@@ -37,6 +49,31 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 30px;
+}
+
+input[type=number] {
+  width: 200px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+input[type=time] {
+  width: 200px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 30px;
 }
 
 input[type=submit]:hover {
@@ -48,6 +85,7 @@ div {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+  font-size: 30px;
 }
 
 button {
@@ -58,8 +96,11 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 30px;
   margin: 4px 2px;
   cursor: pointer;
-  float: left;
+}
+
+select {
+  width:200px;
 }
