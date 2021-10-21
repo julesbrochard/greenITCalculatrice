@@ -28,7 +28,6 @@ return HeureDeTravail= [(heure_depart-heure_arrive)*nb_jours_semaine , temps_de_
 function consommation_Pc(NbHeureDeTravail,ordinateurValue,nombreEcran){
 
     let PC = ordinateurValue.toString().split(":");
-    console.log(PC);
     const SPM = 0.30;                                       // Valeur de base 30%
     const ConsoEcran = 22;
     let HA = NbHeureDeTravail[0]-NbHeureDeTravail[1];       //Nombre d'heures ou le Pc est actif par semaine
@@ -37,6 +36,24 @@ function consommation_Pc(NbHeureDeTravail,ordinateurValue,nombreEcran){
     let UEC_Pc = (SPM* (PC[1]*HA + PC[2]*HL+ PC[3]*HO)/7)*365/1000 + ((1-SPM)*(PC[1]*(HA+HL)+PC[3]*HO)/7)*365/1000+ConsoEcran*nombreEcran*HA*52/1000;
 
     return UEC_Pc.toFixed(2);
+}
+
+/// <summary>
+/// Calcul la consommation du téléphoen du salarié
+/// </summary>
+/// <param name="NbHeureDeTravail">(tableau) Nb d'heures de travail et Nb d'heure de pause d</param>
+/// <param name="telephone">(objet) Le PC demandé sur le formulaire et récupérer dans le fichier json d</param>
+/// <returns>Retourne la consommation du PC par an  en kWh </returns>
+function consommation_tel(NbHeureDeTravail,telephoneValue){
+
+    let telephone = telephoneValue.toString().split(":");
+    const SPM = 0.30;                                       // Valeur de base 30%
+    let HA = NbHeureDeTravail[0]-NbHeureDeTravail[1];       //Nombre d'heures ou le telephone est actif par semaine
+    let HL = NbHeureDeTravail[1];                           //Nombre d'heures ou le telephone est en veille par semaine
+    let HO = 24*7-NbHeureDeTravail[0];                      //Nombre d'heures ou le telephone est éteint par semaine
+    let UEC_telephone = (SPM* (telephone[1]*HA + telephone[2]*HL+ telephone[3]*HO)/7)*365/1000 + ((1-SPM)*(telephone[1]*(HA+HL)+telephone[3]*HO)/7)*365/1000;
+
+    return UEC_telephone.toFixed(2);
 }
 
 /// <summary>
@@ -66,14 +83,14 @@ function consommation_deplacement_quotidien(NbHeureDeTravail,type_de_transport,n
     switch (type_de_transport){
         case 'voiture' :
             valeur_energetique_transport = 600;
-            if (bool_covoiturage == true)
+            if (bool_covoiturage.checked == true)
             {
                 valeur_energetique_transport/=(nb_passagers+1);
             }
             break;
         case 'vehicule_electrique' : 
             valeur_energetique_transport =75;     
-            if (bool_covoiturage == true)
+            if (bool_covoiturage.checked == true)
             {
                 valeur_energetique_transport/=(nb_passagers+1);
             }      
@@ -105,6 +122,6 @@ function consommation_deplacement_pro(part_avion,part_train,part_voiture){
 /// <returns>Retourne le résultat de la conversion </returns>
 function convertisseur_kWh_GES(UEC_kwh){
 
-    const coefficient_conversion = 0.0001;
+    const coefficient_conversion = 0.1;
     return (UEC_kwh*coefficient_conversion).toFixed(2);
 }

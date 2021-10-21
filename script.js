@@ -23,7 +23,6 @@ function populateOrdiDropdown(){
     dropdownOrdi.selectedIndex = 0;
 
     for(var i=0;i< ordinateursJSon.length;i++){
-        console.log(ordinateursJSon[i]);
         dropdownOrdi.innerHTML = dropdownOrdi.innerHTML+ '<option value="' + ordinateursJSon[i]['Type']+":"+ ordinateursJSon[i]['PA']+":"+ ordinateursJSon[i]['PL']+":"+ ordinateursJSon[i]['PO'] +'">' + ordinateursJSon[i]['Type'] + '</option>';
     }
 }
@@ -139,7 +138,7 @@ function form_submit(){
         telephoneDropdown = document.getElementById("telephoneDropdown");
         telephone = telephoneDropdown.value;
         console.log(telephone);
-        impactTelephone= consommation_Pc(nbHeureTravail,telephone);
+        impactTelephone= consommation_tel(nbHeureTravail,telephone);
         consoTotal+=parseFloat(impactTelephone);
     }
 
