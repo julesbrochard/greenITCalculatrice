@@ -132,7 +132,7 @@ function consommation_deplacement_pro(part_avion,part_train,part_voiture){
     nb_km_par_annee*part_avion remplacé par part_avion (nb de km en avion dans l'année)
     */
 
-    let UEC_deplacement_pro = (part_avion/100*360 + part_train/100*80 + part_voiture/100*600)/1000;
+    let UEC_deplacement_pro = (part_avion*360 + part_train*80 + part_voiture*600)/1000;
     return UEC_deplacement_pro;
 }
 
