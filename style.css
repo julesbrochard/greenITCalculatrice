@@ -64,7 +64,7 @@ input[type=number] {
 }
 
 input[type=time] {
-  width: 100px;
+  width: 50px;
   color: black;
   padding: 14px 20px;
   margin: 8px 0;
