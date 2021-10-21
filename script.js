@@ -98,8 +98,7 @@ function timeStringToFloat(time) {
     return hours + minutes / 60;
   }
 
-function form_submit(e){
-    let form = document.getElementById("calcForm");
+function form_submit(){
     //Récuperer les inputs du formulaire
     let checkBoxOrdinateur = document.getElementById("verifOrdinateur");
     let checkBoxTelephone = document.getElementById("verifTelephone");
@@ -125,14 +124,16 @@ function form_submit(e){
     let consoCloud;
     let consoTransport;
     let consoTotal=0;
+    let ecran;
 
     if(checkBoxOrdinateur.checked==true){
         ordinateurDropdown = document.getElementById("ordinateurDropdown");
         ordinateurValue = ordinateurDropdown.value.toString();
         console.log(ordinateurValue);
-        //let ecran = document.getElementById("equipement_ordinateur_ecran").value;
-        impactOrdinateur= consommation_Pc(nbHeureTravail,ordinateurValue);
+        ecran = parseFloat(document.getElementById("ecran").value);
+        impactOrdinateur= consommation_Pc(nbHeureTravail,ordinateurValue,ecran);
         consoTotal+=parseFloat(impactOrdinateur);
+        console.log(impactOrdinateur);
     }
     if(checkBoxTelephone.checked==true){
         telephoneDropdown = document.getElementById("telephoneDropdown");
@@ -157,5 +158,5 @@ function form_submit(e){
     console.log('Consommation total: ' + consoTotal + " KwH");
     let impactCo2 = convertisseur_kWh_GES(consoTotal);
     console.log(impactCo2);
-    document.getElementById("reponseFormulaire").innerHTML += '<p>Votre consommation en Kg eq CO2 est: '+ impactCo2.toString() +'</p>'
+    document.getElementById("reponseFormulaire").innerHTML = '<p>Votre consommation en Kg eq CO2 est: '+ impactCo2.toString() +'</p>'
 }

@@ -8,26 +8,6 @@ function Device(nomModele,type,PA,PL,PO){
     this.PO = PO;               // Puissance appareil éteint
 }
 
-//Test des fonctions
-/*
-let heureDeTravail = nb_dheure_de_travail();
-let nb_dimpression= 4 ;                                      // (A récupérer dans le formulaire)
-let PC_choisi = new Device("Macbook","PC", 45, 15, 7);       // A remplacer par une fonction qui récupère le bon PC dans le fichier Json en fonction du formulaire
-
-let UEC_PC = consommation_Pc(heureDeTravail,PC_choisi);
-let UEC_Cloud = consommation_Cloud(heureDeTravail).toFixed(2);
-let UEC_Transport_Quotidien = consommation_deplacement_quotidien(heureDeTravail).toFixed(2);
-let UEC_Transport_Pro = consommation_deplacement_pro().toFixed(2);
-let UEC_Impression = (0.3*nb_dimpression*heureDeTravail[2]*52/1000).toFixed(2);*/
-/*
-alert("Le salarie travail "+heureDeTravail[0] +"h par semaine dont "+ heureDeTravail[1]+ "h de pause");
-alert("Avec son " + PC_choisi.nomModele +" le salarie a consomme : "+ UEC_PC + "kWh."); 
-alert("Le salarie a consomme "+ UEC_Cloud + " kWh en utilisant le Cloud");
-alert("Conso de déplacement quotidien en kWh : " + UEC_Transport_Quotidien);
-alert("Conso de déplacement pro en kWh : " + UEC_Transport_Pro);
-alert("La conso pour " + nb_dimpression + " impressions par jour, le salarie consommera "+ UEC_Impression + " kWh par an");*/
-
-
 //Fonction du script
 
 /// <summary>
@@ -36,11 +16,6 @@ alert("La conso pour " + nb_dimpression + " impressions par jour, le salarie con
 /// <returns>Retourne un tableau [nombre d'heure au travail pendant la semaine, le nombre d'heure de pause, nb de jour travaillé dans la semaine] </returns>
 function nb_dheure_de_travail(heure_arrive,heure_depart,nb_jours_semaine,temps_de_pause){
 
-/*let heure_arrive = 9;       //Heure d'arrivée du salarié au travail (A récupérer dans le formulaire)
-let heure_depart = 17;      //Heure de départ du salarié au travail (A récupérer dans le formulaire)
-let nb_jours_semaine = 5;   //Nombre de jours par semaine passé au travail (A récupérer dans le formulaire)
-let temps_de_pause = 1;     //Nombre d'heure de pause par jour (A récupérer dans le formulaire)
-*/
 return HeureDeTravail= [(heure_depart-heure_arrive)*nb_jours_semaine , temps_de_pause*nb_jours_semaine , nb_jours_semaine*1]; 
 }
 
@@ -50,17 +25,16 @@ return HeureDeTravail= [(heure_depart-heure_arrive)*nb_jours_semaine , temps_de_
 /// <param name="NbHeureDeTravail">(tableau) Nb d'heures de travail et Nb d'heure de pause d</param>
 /// <param name="PC">(objet) Le PC demandé sur le formulaire et récupérer dans le fichier json d</param>
 /// <returns>Retourne la consommation du PC par an  en kWh </returns>
-function consommation_Pc(NbHeureDeTravail,ordinateurValue){
+function consommation_Pc(NbHeureDeTravail,ordinateurValue,nombreEcran){
 
     let PC = ordinateurValue.toString().split(":");
     console.log(PC);
     const SPM = 0.30;                                       // Valeur de base 30%
-    const ConsoEcran = 22; 
-    let NombreEcran =2;             //(a recuperer dans le formulaire) 
+    const ConsoEcran = 22;
     let HA = NbHeureDeTravail[0]-NbHeureDeTravail[1];       //Nombre d'heures ou le Pc est actif par semaine
     let HL = NbHeureDeTravail[1];                           //Nombre d'heures ou le Pc est en veille par semaine
     let HO = 24*7-NbHeureDeTravail[0];                      //Nombre d'heures ou le Pc est éteint par semaine
-    let UEC_Pc = (SPM* (PC[1]*HA + PC[2]*HL+ PC[3]*HO)/7)*365/1000 + ((1-SPM)*(PC[1]*(HA+HL)+PC[3]*HO)/7)*365/1000+ConsoEcran*NombreEcran*HA*52/1000;
+    let UEC_Pc = (SPM* (PC[1]*HA + PC[2]*HL+ PC[3]*HO)/7)*365/1000 + ((1-SPM)*(PC[1]*(HA+HL)+PC[3]*HO)/7)*365/1000+ConsoEcran*nombreEcran*HA*52/1000;
 
     return UEC_Pc.toFixed(2);
 }
@@ -74,8 +48,6 @@ function consommation_Cloud(NbHeureDeTravail,nb_Go_Stockes,nb_Mail_Envoyes){
     
     const Wh_pour_un_Go = 96;      // Nombre de Wh pour stoké 1go sur le cloud pendant un an
     const Wh_pour_un_Mail = 2.5;    //Nombre de Wh pour stocké un mail un an
-    //let nb_Go_Stockes = 92 ;           //Nombre de giga stocké par le salarié sur le cloud (A récupérer dans le formulaire)
-    //let nb_Mail_Envoyes = 7;         //Nombre de mails envoyé par jour par le salarié (A récupérer dans le formulaire)
 
     return (Wh_pour_un_Go*nb_Go_Stockes+Wh_pour_un_Mail*nb_Mail_Envoyes*52*NbHeureDeTravail[2])/1000;
 
@@ -88,8 +60,6 @@ function consommation_Cloud(NbHeureDeTravail,nb_Go_Stockes,nb_Mail_Envoyes){
 /// <returns>Retourne la consommation énergétique du aux déplacements quotidiens du salarié sur une année (en kWh) </returns>
 function consommation_deplacement_quotidien(NbHeureDeTravail,type_de_transport,nb_km_quotidien,bool_covoiturage,nb_passagers){
 
-    //let type_de_transport='voiture';      //(A recupérer dans le formulaire)
-    //let nb_km_quotidien = 21;                 //(A recupérer dans le formulaire)
     let UEC_transport_quotidien;
     let valeur_energetique_transport;
 
@@ -124,13 +94,6 @@ function consommation_deplacement_quotidien(NbHeureDeTravail,type_de_transport,n
 /// </summary>
 /// <returns>Retourne la consommation énergétique du aux déplacements pro du salarié sur une année (en kWh) </returns>
 function consommation_deplacement_pro(part_avion,part_train,part_voiture){
-
-    /*let nb_km_par_annee=17542;    //(A recupérer dans le formulaire)
-    let part_avion=15;         //(A recupérer dans le formulaire)
-    let part_train=27;         //(A recupérer dans le formulaire)
-    let part_voiture=100-15-27;       //(A recupérer dans le formulaire)
-    nb_km_par_annee*part_avion remplacé par part_avion (nb de km en avion dans l'année)
-    */
 
     let UEC_deplacement_pro = (part_avion*360 + part_train*80 + part_voiture*600)/1000;
     return UEC_deplacement_pro;
