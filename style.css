@@ -54,7 +54,7 @@ input[type=submit] {
 
 input[type=number] {
   width: 200px;
-  color: white;
+  color: black;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -65,7 +65,7 @@ input[type=number] {
 
 input[type=time] {
   width: 200px;
-  color: white;
+  color: black;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
