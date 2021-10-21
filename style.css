@@ -30,7 +30,7 @@ p{
 }
 
 input[type=text], select {
-  width: 150px;
+  width: 200px;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
